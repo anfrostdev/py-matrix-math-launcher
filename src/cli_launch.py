@@ -1,6 +1,7 @@
 from input_data_reader import InputDataReader
 from cfg_builder import ConfigBuilder
 from matrix_data_converter import MatrixDataConverter
+from output_data_writer import OutputDataWriter
 import MatrixMath 
 
 class CliLaunch:
@@ -11,6 +12,7 @@ class CliLaunch:
         self.inputReader = InputDataReader()
         self.configBuilderMatrix = ConfigBuilder()
         self.matrixDataConverter = MatrixDataConverter()
+        self.outputDataWriter = OutputDataWriter()
 
     def launch(self, fileNameOne, fileNameTwo, fileNameRes):
         print(f'Open file "{fileNameOne}" and read config matrix one...', end = ' ')
@@ -69,6 +71,16 @@ class CliLaunch:
                 configMatrixResult,
                 dataMatrixResult
             )
+        )
+        print('Ok')
+
+        print(f'Result write in file "{fileNameRes}"...', end = ' ')
+        self.outputDataWriter.output_matrix(
+            fileNameRes,
+            configMatrixResult,
+            self.CONFIG_SEPARATOR,
+            dataMatrixResult,
+            self.DATA_SEPARATOR
         )
         print('Ok')
 
