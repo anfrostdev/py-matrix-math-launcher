@@ -1,5 +1,6 @@
 from input_data_reader import InputDataReader
 from cfg_builder import ConfigBuilder
+import MatrixMath 
 
 class CliLaunch:
 
@@ -21,6 +22,16 @@ class CliLaunch:
             self.inputReader.input_cfg(fileNameTwo, self.CONFIG_SEPARATOR)
         )
         print('Ok')
+
+        if not MatrixMath.validate_possibility_multiply_matrix(
+            (
+                self.configBuilderMatrix.build_cfg_to_list(configMatrixOne),
+                self.configBuilderMatrix.build_cfg_to_list(configMatrixTwo)
+            )
+        ):
+            raise Exception('Can\'t multiply: matrix size mismatch')
+
+        print('Matrices of corresponding dimensions, can multiply')
 
         print('Done')
 
