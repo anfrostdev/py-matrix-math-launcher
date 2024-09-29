@@ -1,5 +1,6 @@
 from input_data_reader import InputDataReader
 from cfg_builder import ConfigBuilder
+from matrix_data_converter import MatrixDataConverter
 import MatrixMath 
 
 class CliLaunch:
@@ -9,6 +10,7 @@ class CliLaunch:
         self.DATA_SEPARATOR = ';'
         self.inputReader = InputDataReader()
         self.configBuilderMatrix = ConfigBuilder()
+        self.matrixDataConverter = MatrixDataConverter()
 
     def launch(self, fileNameOne, fileNameTwo, fileNameRes):
         print(f'Open file "{fileNameOne}" and read config matrix one...', end = ' ')
@@ -32,6 +34,28 @@ class CliLaunch:
             raise Exception('Can\'t multiply: matrix size mismatch')
 
         print('Matrices of corresponding dimensions, can multiply')
+
+        print(f'Open file "{fileNameOne}" and read matrix one data...', end = ' ')
+        dataMatrixOne = self.matrixDataConverter.convert(
+            configMatrixOne,
+            self.inputReader.input_matrix_data(
+                fileNameOne,
+                configMatrixOne,
+                self.DATA_SEPARATOR
+            )
+        )
+        print('Ok')
+
+        print(f'Open file "{fileNameTwo}" and read matrix two data...', end = ' ')
+        dataMatrixTwo = self.matrixDataConverter.convert(
+            configMatrixTwo,
+            self.inputReader.input_matrix_data(
+                fileNameTwo,
+                configMatrixTwo,
+                self.DATA_SEPARATOR
+            )
+        )
+        print('Ok')
 
         print('Done')
 
