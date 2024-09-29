@@ -57,6 +57,21 @@ class CliLaunch:
         )
         print('Ok')
 
+        print('Start multiply...', end = ' ')
+        configMatrixResult = []
+        dataMatrixResult = []
+        MatrixMath.multiply_two_matrix(
+            (
+                self.configBuilderMatrix.build_cfg_to_list(configMatrixOne),
+                dataMatrixOne,
+                self.configBuilderMatrix.build_cfg_to_list(configMatrixTwo),
+                dataMatrixTwo,
+                configMatrixResult,
+                dataMatrixResult
+            )
+        )
+        print('Ok')
+
         print('Done')
 
         return True
